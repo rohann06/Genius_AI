@@ -8,7 +8,7 @@ const Navbar = () => {
         <span className=" text-red-600 text-[35px]">
           <SiOpsgenie />
         </span>
-        Genius
+        Genius.Ai
       </div>
       <div></div>
     </div>
