@@ -1,5 +1,6 @@
 import React from "react";
 import { SiOpsgenie } from "react-icons/si";
+import NavOptions from "../NavOptions";
 
 const Navbar = () => {
   return (
@@ -10,7 +11,14 @@ const Navbar = () => {
         </span>
         Genius.Ai
       </div>
-      <div></div>
+
+      {/* Options */}
+      <NavOptions />
+
+      {/* Footer */}
+      <div className=" absolute bottom-4 left-[80px] text-center my-5 text-[#b8b7b7] font-medium">
+        Roha Ahrue ©2023
+      </div>
     </div>
   );
 };
