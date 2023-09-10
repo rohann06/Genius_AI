@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { UserButton } from "@clerk/nextjs";
 import MobileNavbar from "../components/MobileNavbar";
+import { SiOpsgenie } from "react-icons/si";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,17 +12,24 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           <Navbar />
         </div>
       </div>
-      <main className=" md:pl-80 mx-2 my-5 md:mx-10 md:my-7">
-        <div className=" flex md:justify-end justify-between items-center">
+      <main className=" md:pl-80 mx-2 my-3 md:mx-10 md:my-7">
+        <div className=" flex md:justify-end  justify-between items-center">
+          <div className=" md:hidden md:text-base  font-LexendDeca md:text-[#f6f5f5] font-semibold text-[25px] flex items-center gap-1">
+            <span className=" text-red-600 text-[29px]">
+              <SiOpsgenie />
+            </span>
+            Genius.Ai
+          </div>
           <div className=" md:hidden ">
             <MobileNavbar />
           </div>
-          <div className=" flex justify-end items-end ">
-            <div className=" bg-gray-200 px-4 py-2 rounded-full">
-              <UserButton afterSignOutUrl="/" showName />
-            </div>
+        </div>
+        <div className=" flex justify-end items-end">
+          <div className=" hidden md:block bg-gray-200 px-3 py-1 md:px-4 md:py-2 rounded-full">
+            <UserButton afterSignOutUrl="/" showName />
           </div>
         </div>
+
         {children}
       </main>
     </div>
