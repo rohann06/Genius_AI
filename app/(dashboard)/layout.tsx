@@ -25,7 +25,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
         <div className=" flex justify-end items-end">
-          <div className=" hidden md:block bg-gray-200 px-3 py-1 md:px-4 md:py-2 rounded-full">
+          <div className=" hidden md:block bg-gray-200  px-2 py-2 rounded-full">
             <UserButton afterSignOutUrl="/" showName />
           </div>
         </div>
