@@ -12,11 +12,13 @@ import {
   LuSettings,
 } from "react-icons/lu";
 
+
+
 const NavOptions = () => {
   const pathname = usePathname();
   return (
     <>
-      <div className=" mt-14 flex flex-col gap-7 text-lg text-[#F5F5F5] font-medium">
+      <div className=" mt-14 flex flex-col gap-3 text-lg text-[#F5F5F5] font-medium">
         <Link href={"/dashboard"}>
           <div
             className={` ${
@@ -71,7 +73,7 @@ const NavOptions = () => {
               pathname === "/musicGenerator" && "bg-[#404454]"
             } flex gap-3 items-center cursor-pointer hover:bg-[#404454] py-3 px-4 w-full rounded-lg`}
           >
-            <span className=" text-[23px] text-green-500">
+            <span className=" text-[23px] text-orange-500">
               <LuMusic />
             </span>
             Music Generator
