@@ -21,7 +21,7 @@ const NavOptionCard = ({
 }: NavOptionCardProps) => {
   return (
     <Link href={link}>
-      <div className=" flex justify-between items-center md:p-3 md:mx-40 rounded-xl shadow-md border hover:shadow-lg">
+      <div className=" flex justify-between items-center p-2 md:p-3 md:mx-40 rounded-xl shadow-md border hover:shadow-lg">
         <div className=" flex items-center gap-2">
           <div className={upprtDivStyle}>
             <div className={iconStyle}>{icon}</div>
