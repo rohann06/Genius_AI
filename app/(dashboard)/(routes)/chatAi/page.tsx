@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { formSchema } from "./constants";
 import { Input } from "@/app/components/ui/input";
 import Empty from "@/app/components/Empty";
+import { Loading } from "@/app/components/Loading";
 
 const ChatAi = () => {
   const [chatPrompt, setChatPrompt] = useState<ChatCompletionRequestMessage[]>(
@@ -96,7 +97,11 @@ const ChatAi = () => {
         </form>
       </Form>
       <div className=" space-y-4 mt-4">
-        
+        {isLoading && (
+          <div className=" bg-white p-8 rounded-lg flex justify-center items-center w-full bg-muted">
+            <Loading />
+          </div>
+        )}
         {chatPrompt.length === 0 && !isLoading && (
           <div>
             <Empty lable="No Conversition Started." />
