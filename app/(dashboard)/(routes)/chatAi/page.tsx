@@ -1,17 +1,62 @@
 "use client";
+
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Heading from "@/app/components/Heading";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { LuMessageSquare } from "react-icons/lu";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { ChatCompletionRequestMessage } from "openai";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+} from "@/app/components/ui/form";
+import { useForm } from "react-hook-form";
+import { formSchema } from "./constants";
+import { Input } from "@/app/components/ui/input";
+import Empty from "@/app/components/Empty";
 
 const ChatAi = () => {
-  const [chatPrompt, setChatPrompt] = useState("");
+  const [chatPrompt, setChatPrompt] = useState<ChatCompletionRequestMessage[]>(
+    []
+  );
+  const router = useRouter();
 
-  const handleChatAIFrom = async (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Prompt submited");
-    setChatPrompt("");
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      prompt: "",
+    },
+  });
+  const isLoading = form.formState.isSubmitting;
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const userMessage: ChatCompletionRequestMessage = {
+        role: "user",
+        content: values.prompt,
+      };
+      const newMessages = [...chatPrompt, userMessage];
+
+      const response = await axios.post("/api/chatAI", {
+        chatPrompt: newMessages,
+      });
+
+      setChatPrompt((current) => [...current, userMessage, response.data]);
+
+      form.reset();
+    } catch (error) {
+      //TODO: open pro model
+      console.log("error", error);
+    } finally {
+      router.refresh();
+    }
   };
+
   return (
     <div>
       <Heading
@@ -21,26 +66,48 @@ const ChatAi = () => {
         iconColor="text-violet-500 text-[25px] font-bold"
         iconBackground="bg-violet-200/40 p-2 md:p-4 rounded-lg"
       />
-      <form
-        onSubmit={handleChatAIFrom}
-        className=" flex items-center gap-5 p-1 md:p-2 border-gray-500 border-2 w-full my-7 md:my-10 rounded-xl"
-      >
-        <input
-          value={chatPrompt}
-          onChange={(e) => setChatPrompt(e.target.value)}
-          name="prompt"
-          placeholder=" Write your prompt here......"
-          className=" w-full rounded-lg p-2  outline-none"
-        />
-        <button
-          className={` text-white hover:bg-violet-700 bg-violet-500 px-1 py-1 md:px-2 md:py-3 rounded-lg font-medium font-Rubik  md:w-[12%] text-sm md:text-base ${
-            !chatPrompt && "cursor-not-allowed opacity-50"
-          }`}
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className=" lg:flex lg:items-center lg:justify-between  gap-5 p-1 md:p-2 border-gray-500 border-2 w-full my-7 md:my-10 rounded-xl"
         >
-          Generate Chat
-        </button>
-      </form>
-      <div>Chats</div>
+          <FormField
+            name={"prompt"}
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    disabled={isLoading}
+                    placeholder=" Write your prompt here......"
+                    className="   border-0 focus-visible:ring-0 focus-visible:ring-transparent rounded-lg p-2  outline-none  md:w-[50px] lg:w-[1300px]"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <button
+            disabled={isLoading}
+            className={` text-white hover:bg-violet-700 bg-violet-500 px-1 py-1 md:px-2 md:py-3 rounded-lg font-medium font-Rubik  md:w-[12%] text-sm md:text-base w-full mt-10 md:mt-0`}
+          >
+            Generate Chat
+          </button>
+        </form>
+      </Form>
+      <div className=" space-y-4 mt-4">
+        
+        {chatPrompt.length === 0 && !isLoading && (
+          <div>
+            <Empty lable="No Conversition Started." />
+          </div>
+        )}
+        <div>
+          {chatPrompt.map((message) => (
+            <div key={message.content}>{message.content}</div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
