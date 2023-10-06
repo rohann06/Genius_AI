@@ -20,11 +20,11 @@ import { formSchema } from "./constants";
 import { Input } from "@/app/components/ui/input";
 import Empty from "@/app/components/Empty";
 import { Loading } from "@/app/components/Loading";
+import BoatAvatar from "@/app/components/BoatAvatar";
+import UerAvatar from "@/app/components/UserAvatar";
 
 const ChatAi = () => {
-  const [chatPrompt, setChatPrompt] = useState<ChatCompletionRequestMessage[]>(
-    []
-  );
+  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -41,20 +41,18 @@ const ChatAi = () => {
         role: "user",
         content: values.prompt,
       };
-      const newMessages = [...chatPrompt, userMessage];
+      const newMessages = [...messages, userMessage];
 
-      const response = await axios.post("/api/chatAI", {
-        chatPrompt: newMessages,
+      const response = await axios.post("api/chatAI", {
+        messages: newMessages,
       });
 
-      setChatPrompt((current) => [...current, userMessage, response.data]);
+      setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
     } catch (error) {
       //TODO: open pro model
       console.log("error", error);
-    } finally {
-      router.refresh();
     }
   };
 
@@ -102,14 +100,24 @@ const ChatAi = () => {
             <Loading />
           </div>
         )}
-        {chatPrompt.length === 0 && !isLoading && (
+        {messages.length === 0 && !isLoading && (
           <div>
             <Empty lable="No Conversition Started." />
           </div>
         )}
-        <div>
-          {chatPrompt.map((message) => (
-            <div key={message.content}>{message.content}</div>
+        <div className=" ">
+          {messages.map((message) => (
+            <div
+              className={`p-8 rounded-lg flex items-center gap-x-8 w-full ${
+                message.role === "user"
+                  ? "bg-white border border-black/10"
+                  : "bg-muted"
+              } `}
+              key={message.content}
+            >
+              {message?.role === "user" ? <UerAvatar /> : <BoatAvatar />}
+              <p className=" text-sm">{message.content}</p>
+            </div>
           ))}
         </div>
       </div>
