@@ -3,7 +3,7 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
-import { LuMessageSquare } from "react-icons/lu";
+import { LuCode2, LuMessageSquare } from "react-icons/lu";
 import axios from "axios";
 import { ChatCompletionRequestMessage } from "openai";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -61,7 +61,7 @@ const ChatAi = () => {
       <Heading
         title="Code Generator"
         subtitle="An advanced code generator AI model"
-        icon={<LuMessageSquare />}
+        icon={<LuCode2 />}
         iconColor="text-teal-500 text-[25px] font-bold"
         iconBackground="bg-teal-200/40 p-2 md:p-4 rounded-lg"
       />
@@ -108,7 +108,7 @@ const ChatAi = () => {
         )}
         {messages.length === 0 && !isLoading && (
           <div>
-            <Empty lable="No Conversition Started." />
+            <Empty lable="No code generation Started." />
           </div>
         )}
         <div className=" ">
