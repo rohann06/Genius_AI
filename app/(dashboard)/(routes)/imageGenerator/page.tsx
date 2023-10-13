@@ -5,7 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { LuImage } from "react-icons/lu";
 import axios from "axios";
-import { AiOutlineLoading3Quarters, AiOutlineCloudDownload } from "react-icons/ai";
+import {
+  AiOutlineLoading3Quarters,
+  AiOutlineCloudDownload,
+} from "react-icons/ai";
 import {
   Form,
   FormControl,
@@ -28,10 +31,12 @@ import {
   SelectValue,
 } from "@/app/components/ui/select";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const ImageGeneratorPage = () => {
   const [images, setImages] = useState<string[]>([]);
-
+  const router = useRouter();
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,6 +60,8 @@ const ImageGeneratorPage = () => {
     } catch (error) {
       //TODO: open pro model
       console.log("error", error);
+    } finally {
+      router.refresh();
     }
   };
 
@@ -186,8 +193,11 @@ const ImageGeneratorPage = () => {
             <div key={src} className=" rounded-lg overflow-hidden">
               <div className=" relative aspect-square">
                 <Image alt="img" fill src={src} />
-                <button onClick={() => window.open(src)} className=" absolute bottom-3 right-4 text-center text-ellipsis bg-gray-300 p-3 rounded-full">
-                  <AiOutlineCloudDownload/>
+                <button
+                  onClick={() => window.open(src)}
+                  className=" absolute bottom-3 right-4 text-center text-ellipsis bg-gray-300 p-3 rounded-full"
+                >
+                  <AiOutlineCloudDownload />
                 </button>
               </div>
             </div>

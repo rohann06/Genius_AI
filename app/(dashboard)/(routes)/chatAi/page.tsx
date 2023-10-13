@@ -53,6 +53,8 @@ const ChatAi = () => {
     } catch (error) {
       //TODO: open pro model
       console.log("error", error);
+    } finally {
+      router.refresh();
     }
   };
 
@@ -91,7 +93,7 @@ const ChatAi = () => {
             className={` text-white hover:bg-violet-700 bg-violet-500 px-1 py-1 md:px-2 md:py-3 rounded-lg font-medium font-Rubik  md:w-[10%] text-sm md:text-base w-full mt-10 md:mt-0`}
           >
             {isLoading ? (
-              <div className=" animate-spin flex justify-center items-center text-xl">
+              <div className=" animate-spin flex justify-center items-center text-xl cursor-not-allowed">
                 <AiOutlineLoading3Quarters />
               </div>
             ) : (
@@ -100,7 +102,7 @@ const ChatAi = () => {
           </button>
         </form>
       </Form>
-      <div className=" space-y-4 mt-4">
+      <div className=" space-y-4 my-5">
         {isLoading && (
           <div className=" bg-white p-8 rounded-lg flex justify-center items-center w-full bg-muted">
             <Loading />
@@ -111,10 +113,10 @@ const ChatAi = () => {
             <Empty lable="No Conversition Started." />
           </div>
         )}
-        <div className=" ">
+        <div>
           {messages.map((message) => (
             <div
-              className={`p-8 rounded-lg flex items-start gap-x-8 w-full ${
+              className={`p-8 my-2 rounded-lg flex items-start gap-x-8 w-full ${
                 message.role === "user"
                   ? "bg-white border border-black/10"
                   : "bg-muted"
@@ -122,7 +124,7 @@ const ChatAi = () => {
               key={message.content}
             >
               {message?.role === "user" ? <UerAvatar /> : <BoatAvatar />}
-              <p className=" text-sm">{message.content}</p>
+              <p className=" text-sm">{message.content || ""}</p>
             </div>
           ))}
         </div>

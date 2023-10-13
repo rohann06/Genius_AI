@@ -23,10 +23,12 @@ import { Loading } from "@/app/components/Loading";
 import BoatAvatar from "@/app/components/BoatAvatar";
 import UerAvatar from "@/app/components/UserAvatar";
 import Heading from "@/app/components/Heading";
+import { useRouter } from "next/navigation";
 
 const ChatAi = () => {
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
-
+  const router = useRouter();
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,6 +55,8 @@ const ChatAi = () => {
     } catch (error) {
       //TODO: open pro model
       console.log("error", error);
+    } finally {
+      router.refresh();
     }
   };
 

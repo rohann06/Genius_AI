@@ -23,7 +23,8 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const MusicGeneratorPage = () => {
   const [music, setMusic] = useState<string>();
-
+  const router = useRouter();
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,6 +44,8 @@ const MusicGeneratorPage = () => {
     } catch (error) {
       //TODO: open pro model
       console.log("error", error);
+    } finally {
+      router.refresh();
     }
   };
 

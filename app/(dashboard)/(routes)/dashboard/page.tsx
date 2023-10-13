@@ -1,3 +1,5 @@
+"use client";
+
 import NavOptionCard from "@/app/components/NavOptionCard";
 import React from "react";
 import {

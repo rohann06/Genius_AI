@@ -18,9 +18,11 @@ import { Input } from "@/app/components/ui/input";
 import Empty from "@/app/components/Empty";
 import { Loading } from "@/app/components/Loading";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 const VideoGeneratorPage = () => {
   const [video, setVideo] = useState<string>();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,6 +43,8 @@ const VideoGeneratorPage = () => {
     } catch (error) {
       //TODO: open pro model
       console.log("error", error);
+    }finally{
+      router.refresh()
     }
   };
 
