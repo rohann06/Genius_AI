@@ -20,11 +20,13 @@ import { Input } from "@/app/components/ui/input";
 import Empty from "@/app/components/Empty";
 import { Loading } from "@/app/components/Loading";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useProModel } from "@/hooks/use-pro-model";
 
 const MusicGeneratorPage = () => {
   const [music, setMusic] = useState<string>();
   const router = useRouter();
-  
+  const proModel = useProModel();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,8 +43,10 @@ const MusicGeneratorPage = () => {
       setMusic(response.data.audio);
 
       form.reset();
-    } catch (error) {
-      //TODO: open pro model
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModel.onOpen();
+      }
       console.log("error", error);
     } finally {
       router.refresh();

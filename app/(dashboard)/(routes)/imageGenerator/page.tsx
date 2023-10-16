@@ -32,11 +32,13 @@ import {
 } from "@/app/components/ui/select";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useProModel } from "@/hooks/use-pro-model";
 
 const ImageGeneratorPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const router = useRouter();
-  
+  const proModel = useProModel();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -57,8 +59,10 @@ const ImageGeneratorPage = () => {
       setImages(urls);
 
       form.reset();
-    } catch (error) {
-      //TODO: open pro model
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModel.onOpen();
+      }
       console.log("error", error);
     } finally {
       router.refresh();

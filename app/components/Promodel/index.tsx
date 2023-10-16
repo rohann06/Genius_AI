@@ -67,13 +67,14 @@ const Promodel = () => {
       <Dialog open={proModel.isOpen} onOpenChange={proModel.onClose}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className=" flex justify-center items-center flex-col gap-y-4 pb-2">
+            <DialogTitle className=" flex justify-center items-center flex-col gap-y-2 pb-2">
               <div className=" flex items-center gap-x-2 font-bold py-1">
                 Upgrade to Genius
                 <Badge className=" bg-gradient-to-r hover:bg-gradient-to-r from-indigo-500  via-purple-500  to-pink-500 uppercase py-1 text-sm">
                   Pro
                 </Badge>
               </div>
+                <p className=" text-sm font-light">Your 6 FREE trials are over, please upgrade to access more.</p>
             </DialogTitle>
             <DialogDescription>
               <div className=" flex flex-col gap-y-5 md:gap-y-3 w-full mt-5 md:mt-10">
@@ -89,7 +90,7 @@ const Promodel = () => {
                         <p>{NavOption.title}</p>
                       </div>
                     </div>
-                    <div className=" text-xl m-2">
+                    <div className=" text-xl m-2 text-green-600">
                       <LuCheckCheck />
                     </div>
                   </div>

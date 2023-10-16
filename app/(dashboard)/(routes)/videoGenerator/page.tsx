@@ -19,10 +19,12 @@ import Empty from "@/app/components/Empty";
 import { Loading } from "@/app/components/Loading";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { useProModel } from "@/hooks/use-pro-model";
 
 const VideoGeneratorPage = () => {
   const [video, setVideo] = useState<string>();
   const router = useRouter();
+  const proModel = useProModel();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,11 +42,13 @@ const VideoGeneratorPage = () => {
       setVideo(response.data[0]);
 
       form.reset();
-    } catch (error) {
-      //TODO: open pro model
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModel.onOpen();
+      }
       console.log("error", error);
-    }finally{
-      router.refresh()
+    } finally {
+      router.refresh();
     }
   };
 
@@ -106,7 +110,10 @@ const VideoGeneratorPage = () => {
         )}
         <div>
           {video && (
-            <video className=" w-full aspect-video mt-8 rounded-lg border bg-black" controls>
+            <video
+              className=" w-full aspect-video mt-8 rounded-lg border bg-black"
+              controls
+            >
               <source src={video} />
             </video>
           )}
@@ -117,4 +124,3 @@ const VideoGeneratorPage = () => {
 };
 
 export default VideoGeneratorPage;
-

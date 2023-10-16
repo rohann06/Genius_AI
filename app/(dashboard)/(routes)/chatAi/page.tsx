@@ -22,10 +22,12 @@ import { Loading } from "@/app/components/Loading";
 import BoatAvatar from "@/app/components/BoatAvatar";
 import UerAvatar from "@/app/components/UserAvatar";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useProModel } from "@/hooks/use-pro-model";
 
 const ChatAi = () => {
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const router = useRouter();
+  const proModel = useProModel();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -50,8 +52,10 @@ const ChatAi = () => {
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
-    } catch (error) {
-      //TODO: open pro model
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModel.onOpen();
+      }
       console.log("error", error);
     } finally {
       router.refresh();
