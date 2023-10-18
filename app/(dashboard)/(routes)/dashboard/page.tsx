@@ -62,6 +62,7 @@ const DashboardPage = () => {
       <div className=" flex flex-col gap-y-5 md:gap-y-6 w-full mt-5 md:mt-10">
         {NavOptions.map((NavOption) => (
           <NavOptionCard
+            key={NavOption.title}
             icon={NavOption.icon}
             title={NavOption.title}
             link={NavOption.link}

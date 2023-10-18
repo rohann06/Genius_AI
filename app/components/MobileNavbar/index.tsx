@@ -1,26 +1,29 @@
 import React from "react";
-import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { Sheet, SheetContent, SheetTrigger } from "@/app/components/ui/sheet";
 import Navbar from "../Navbar";
+import { getApiLimitCount } from "@/lib/api-limit";
 
-const MobileNavbar = () => {
+const MobileNavbar = async () => {
+  const apiLimitCount = await getApiLimitCount();
   return (
     <Sheet>
       <div className=" p-4">
-        <Button>
+        <div className=" flex items-center">
           <SheetTrigger>
-            <Menu />
+            <div className=" bg-gray-200 p-1 rounded-lg">
+              <Menu />
+            </div>
           </SheetTrigger>
           <div className=" md:hidden block ml-3">
             <UserButton afterSignOutUrl="/" />
           </div>
-        </Button>
+        </div>
       </div>
       <SheetContent side="left" className="p-0 bg-gray-800">
-        <div className="  h-full inset-y-0 z-[80]">
-          <Navbar />
+        <div className="  h-full inset-y-0">
+          <Navbar apiLimitCount={apiLimitCount} />
         </div>
       </SheetContent>
     </Sheet>

@@ -18,7 +18,7 @@ const NavOptions = () => {
   const pathname = usePathname();
   return (
     <>
-      <div className=" mt-14 flex flex-col gap-3 text-base text-[#F5F5F5] font-medium">
+      <div className=" mt-14 flex flex-col gap-3 text-sm md:text-base text-[#F5F5F5] font-medium">
         <Link href={"/dashboard"}>
           <div
             className={` ${

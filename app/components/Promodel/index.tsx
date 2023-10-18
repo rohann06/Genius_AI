@@ -74,12 +74,17 @@ const Promodel = () => {
                   Pro
                 </Badge>
               </div>
-                <p className=" text-sm font-light">Your 6 FREE trials are over, please upgrade to access more.</p>
+              <p className=" text-sm font-light">
+                Your 6 FREE trials are over, please upgrade to access more.
+              </p>
             </DialogTitle>
             <DialogDescription>
               <div className=" flex flex-col gap-y-5 md:gap-y-3 w-full mt-5 md:mt-10">
                 {NavOptions.map((NavOption) => (
-                  <div className=" flex justify-between items-center p-2 md:p-2  rounded-xl shadow-md border">
+                  <div
+                    key={NavOption.title}
+                    className=" flex justify-between items-center p-2 md:p-2  rounded-xl shadow-md border"
+                  >
                     <div className=" flex items-center gap-2">
                       <div className={NavOption.upprtDivStyle}>
                         <div className={NavOption.iconStyle}>

@@ -19,7 +19,7 @@ const Navbar = ({ apiLimitCount = 0 }: NavbarProps) => {
           Genius.Ai
         </div>
       </Link>
-      <div className=" flex flex-col  md:gap-y-32 justify-between">
+      <div className=" flex flex-col gap-y-32  md:gap-y-32 justify-between">
         {/* Options */}
           <NavOptions />
         {/* API use counter */}
