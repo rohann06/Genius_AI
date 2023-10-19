@@ -20,6 +20,7 @@ import { Loading } from "@/app/components/Loading";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { useProModel } from "@/hooks/use-pro-model";
+import toast from "react-hot-toast";
 
 const VideoGeneratorPage = () => {
   const [video, setVideo] = useState<string>();
@@ -45,8 +46,9 @@ const VideoGeneratorPage = () => {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModel.onOpen();
+      } else {
+        toast.error("Opps!, Something went wrong....");
       }
-      console.log("error", error);
     } finally {
       router.refresh();
     }

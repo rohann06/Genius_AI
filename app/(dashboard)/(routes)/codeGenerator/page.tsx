@@ -25,6 +25,7 @@ import UerAvatar from "@/app/components/UserAvatar";
 import Heading from "@/app/components/Heading";
 import { useRouter } from "next/navigation";
 import { useProModel } from "@/hooks/use-pro-model";
+import toast from "react-hot-toast";
 
 const ChatAi = () => {
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
@@ -57,6 +58,8 @@ const ChatAi = () => {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModel.onOpen();
+      } else {
+        toast.error("Opps!, Something went wrong....");
       }
       console.log("error", error);
     } finally {

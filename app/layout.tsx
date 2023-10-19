@@ -2,8 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Toaster } from "react-hot-toast";
 import Promodel from "./components/Promodel";
+import ToastProvider from "@/providers/toast-provider";
+import CrispProvider from "@/providers/crisp-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +21,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <CrispProvider />
         <body className={inter.className}>
           <>
             <Promodel />
             {children}
-            <Toaster />
+            <ToastProvider />
           </>
         </body>
       </html>

@@ -33,6 +33,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useProModel } from "@/hooks/use-pro-model";
+import toast from "react-hot-toast";
 
 const ImageGeneratorPage = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -62,8 +63,9 @@ const ImageGeneratorPage = () => {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModel.onOpen();
+      }else{
+        toast.error("Opps!, Something went wrong....")
       }
-      console.log("error", error);
     } finally {
       router.refresh();
     }
