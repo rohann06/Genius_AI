@@ -10,8 +10,8 @@ const LandingNavbar = () => {
   return (
     <nav className=" p-4 bg-transparent flex items-center justify-between">
       <Link href={"/"} className=" flex items-center">
-        <div className=" font-LexendDeca text-[#f6f5f5] font-semibold text-[30px] flex justify-center items-center gap-3">
-          <span className=" text-red-600 text-[35px]">
+        <div className=" font-LexendDeca text-[#f6f5f5] font-semibold text-[20px] md:text-[30px] flex justify-center items-center gap-3">
+          <span className=" text-red-600 md:text-[35px]">
             <SiOpsgenie />
           </span>
           Genius.Ai
