@@ -1,9 +1,9 @@
 import React from "react";
 import { Menu } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
-import { Sheet, SheetContent, SheetTrigger } from "@/app/components/ui/sheet";
 import Navbar from "../Navbar";
 import { getApiLimitCount } from "@/lib/api-limit";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const MobileNavbar = async () => {
   const apiLimitCount = await getApiLimitCount();
