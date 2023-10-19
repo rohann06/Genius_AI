@@ -12,8 +12,6 @@ import {
   LuSettings,
 } from "react-icons/lu";
 
-
-
 const NavOptions = () => {
   const pathname = usePathname();
   return (
@@ -91,12 +89,6 @@ const NavOptions = () => {
             Code Generator
           </div>
         </Link>
-        <div className=" flex gap-3 items-center cursor-pointer hover:bg-[#404454] py-3 px-4 w-full rounded-lg">
-          <span className=" text-[23px] text-slate-50">
-            <LuSettings />
-          </span>
-          Settings
-        </div>
       </div>
     </>
   );

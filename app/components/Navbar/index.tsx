@@ -19,7 +19,7 @@ const Navbar = ({ apiLimitCount = 0 }: NavbarProps) => {
           Genius.Ai
         </div>
       </Link>
-      <div className=" flex flex-col gap-y-32  md:gap-y-32 justify-between">
+      <div className=" flex flex-col gap-y-32  md:gap-y-36 justify-between">
         {/* Options */}
           <NavOptions />
         {/* API use counter */}
@@ -28,7 +28,7 @@ const Navbar = ({ apiLimitCount = 0 }: NavbarProps) => {
         {/* Footer */}
         <a href="https://rohan06.vercel.app/">
           <div className=" text-center my-5 text-[#b8b7b7] font-medium underline">
-            Roha Ahrue ©2023
+            Roha Ahire ©2023
           </div>
         </a>
       </div>
