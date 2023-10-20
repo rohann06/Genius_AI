@@ -28,7 +28,7 @@ const Navbar = ({ apiLimitCount = 0 }: NavbarProps) => {
         {/* Footer */}
         <a href="https://rohan06.vercel.app/">
           <div className=" text-center my-5 text-[#b8b7b7] font-medium underline">
-            Roha Ahire ©2023
+            Rohan Ahire ©2023
           </div>
         </a>
       </div>

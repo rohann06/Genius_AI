@@ -38,7 +38,7 @@ const NavOptions = () => {
             <span className=" text-[23px] text-violet-500">
               <LuMessageSquare />
             </span>
-            Caht AI
+            Chat AI
           </div>
         </Link>
         <Link href={"/imageGenerator"}>

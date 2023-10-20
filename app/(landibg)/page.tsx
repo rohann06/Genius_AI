@@ -12,7 +12,7 @@ const LandingPage = () => {
       <p className=" text-sm text-center -mt-12 text-[#b8b7b7] font-medium flex items-center justify-center gap-x-1">
         Made by
         <a href="https://rohan06.vercel.app/">
-          <div className="  underline">Roha Ahire ©2023</div>
+          <div className="  underline">Rohan Ahire ©2023</div>
         </a>
       </p>
     </div>
