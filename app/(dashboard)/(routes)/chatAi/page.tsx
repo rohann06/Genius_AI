@@ -77,17 +77,17 @@ const ChatAi = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className=" lg:flex lg:gap-2 p-1 md:p-2 border-gray-500 border-2 w-full my-7 md:my-10 rounded-xl"
+          className=" lg:flex justify-center lg:gap-2 p-1 md:p-2 border-gray-500 border-2 w-full  my-7 md:my-10 rounded-xl"
         >
           <FormField
             name={"prompt"}
             render={({ field }) => (
-              <FormItem>
+              <FormItem className=" w-full">
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     placeholder=" Write your prompt here......"
-                    className="border-0 focus-visible:ring-0 focus-visible:ring-transparent rounded-lg p-2 outline-none w-full lg:w-[1300px] md:w-[500px]"
+                    className=" flex-1 border-0 focus-visible:ring-0 focus-visible:ring-transparent rounded-lg p-2 outline-none w-full "
                     {...field}
                   />
                 </FormControl>
@@ -96,7 +96,7 @@ const ChatAi = () => {
           />
           <button
             disabled={isLoading}
-            className={` w-full rounded-lg font-medium  text-white hover:bg-violet-700 bg-violet-500 px-1 py-1 mt-2 md:mt-0`}
+            className={` lg:w-max w-full  rounded-lg font-medium  text-white hover:bg-violet-700 bg-violet-500 px-4 py-1 mt-4 md:mt-0`}
           >
             {isLoading ? (
               <div className=" animate-spin flex justify-center items-center text-xl cursor-not-allowed">
